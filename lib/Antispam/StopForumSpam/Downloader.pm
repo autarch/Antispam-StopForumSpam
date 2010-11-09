@@ -101,4 +101,6 @@ sub _make_file {
     return 'listed_' . $type . '_' . $days . '.zip';
 }
 
+__PACKAGE__->meta()->make_immutable();
+
 1;
