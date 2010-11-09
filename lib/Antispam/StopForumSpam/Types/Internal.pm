@@ -9,7 +9,6 @@ use Path::Class qw( dir file );
 
 use MooseX::Types -declare => [
     qw(
-        BerkeleyDB
         DownloadDays
         DownloadType
         SFSDatabase
@@ -18,6 +17,7 @@ use MooseX::Types -declare => [
         )
 ];
 
+use Antispam::Toolkit::Types qw( DataFile );
 use MooseX::Types::Common::String qw( NonEmptyStr );
 use MooseX::Types::Moose qw( Str );
 use MooseX::Types::Path::Class qw( File );
@@ -32,7 +32,7 @@ my $valid_types_re = '(?:' . ( join '|', @types ) . ')';
 my $valid_days_re  = '(?:' . ( join '|', @days ) . ')';
 
 subtype SFSTextFile,
-    as File,
+    as DataFile,
     where { $_->basename() =~ /${valid_types_re}_${valid_days_re}\.txt/ },
     message { "$_ does not look like the name of a text file downloaded from stop forum spam" };
 
