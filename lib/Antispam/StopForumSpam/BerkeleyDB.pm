@@ -13,7 +13,7 @@ use MooseX::StrictConstructor;
 with 'Antispam::Toolkit::Role::BerkeleyDB';
 
 # We end up going through the validation code twice this way, but
-# unfortunately there's really no better way to specify a more specific type
+# unfortunately there's really no better way to require a more specific type
 # for the file parameter in this class versus the
 # Antispam::Toolkit::Role::BerkeleyDB role.
 around build => sub {
