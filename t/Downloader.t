@@ -13,7 +13,7 @@ use URI;
 my $data_dir = dir( abs_path('.') )->subdir( 't', 'data' );
 
 my $dl = Antispam::StopForumSpam::Downloader->new(
-    _uri_base => URI->new("file://$data_dir") );
+    uri_base => URI->new("file://$data_dir") );
 
 # If we compare file contents directly then the output from a failure is
 # several screens full of garbage.

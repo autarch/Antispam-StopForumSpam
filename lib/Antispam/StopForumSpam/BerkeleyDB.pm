@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-use Antispam::StopForumSpam::Types qw( File SFSTextFile );
+use Antispam::StopForumSpam::Types qw( Bool File SFSTextFile );
 
 use Moose;
 use MooseX::Params::Validate qw( validated_hash );
@@ -28,6 +28,10 @@ around build => sub {
         database => {
             isa    => File,
             coerce => 1,
+        },
+        truncate => {
+            isa     => Bool,
+            default => 1,
         },
     );
 

@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Antispam::StopForumSpam::CLI::UpdateDatabase;
+
+Antispam::StopForumSpam::CLI::UpdateDatabase->new_with_options()->run();

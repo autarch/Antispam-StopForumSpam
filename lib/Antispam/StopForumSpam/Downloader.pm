@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use namespace::autoclean;
 
-use Antispam::StopForumSpam::Types qw( DownloadDays DownloadType Str );
+use Antispam::StopForumSpam::Types qw( DownloadDays DownloadType Str URIObject );
 use File::Temp qw( tempdir );
 use HTTP::Request;
 use LWP::UserAgent;
@@ -27,12 +27,12 @@ has _ua => (
 my $BASE_URL
     = $ENV{HARNESS_ACTIVE}
     ? q{}
-    : 'http://www.stopforumspam.com/downloads/';
+    : q{};#'http://www.stopforumspam.com/downloads/';
 
-# We want this settable via the constructor for testing
-has _uri_base => (
+has uri_base => (
     is      => 'ro',
-    isa     => 'URI',
+    isa     => URIObject,
+    coerce  => 1,
     default => sub { URI->new($BASE_URL) },
 );
 
@@ -82,7 +82,7 @@ sub _make_uri {
 
     my $file = $self->_make_file(@_);
 
-    my $uri = $self->_uri_base()->clone();
+    my $uri = $self->uri_base()->clone();
 
     my $new_path = $uri->path();
     $new_path .= '/' unless $new_path =~ m{/$};

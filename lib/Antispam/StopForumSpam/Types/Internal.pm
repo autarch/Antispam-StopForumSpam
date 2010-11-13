@@ -6,6 +6,7 @@ use warnings;
 use Archive::Zip qw( AZ_OK );
 use File::Temp qw( tempdir );
 use Path::Class qw( dir file );
+use URI;
 
 use MooseX::Types -declare => [
     qw(
@@ -14,6 +15,7 @@ use MooseX::Types -declare => [
         SFSDatabase
         SFSTextFile
         SFSZipFile
+        URIObject
         )
 ];
 
@@ -55,6 +57,13 @@ coerce SFSTextFile,
     via { _unzip_sfs_file($_) };
 
 role_type SFSDatabase, { role => 'Antispam::StopForumSpam::Role::Database' };
+
+subtype URIObject,
+    as class_type('URI');
+
+coerce URIObject,
+    from Str,
+    via { URI->new($_) };
 
 sub _unzip_sfs_file {
     my $zip = shift;
