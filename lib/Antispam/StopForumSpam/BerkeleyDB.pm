@@ -17,9 +17,9 @@ with 'Antispam::Toolkit::Role::BerkeleyDB';
 # for the file parameter in this class versus the
 # Antispam::Toolkit::Role::BerkeleyDB role.
 around build => sub {
-    my $orig = shift;
+    my $orig  = shift;
     my $class = shift;
-    my %p = validated_hash(
+    my %p     = validated_hash(
         \@_,
         file => {
             isa    => SFSTextFile,
@@ -29,26 +29,14 @@ around build => sub {
             isa    => File,
             coerce => 1,
         },
-        truncate => {
+        update => {
             isa     => Bool,
-            default => 1,
+            default => 0,
         },
     );
 
     $class->$orig(%p);
 };
-
-sub _store_value {
-    my $self  = shift;
-    my $db    = shift;
-    my $value = shift;
-
-    $db->db_put( $value => 1 )
-        and die "Fatal error trying to write to the BerkeleyDB file at "
-        . $self->database();
-
-    return;
-}
 
 __PACKAGE__->meta()->make_immutable();
 
