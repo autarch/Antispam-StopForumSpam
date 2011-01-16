@@ -68,7 +68,7 @@ sub run {
         days => $self->days(),
     );
 
-    $self->_maybe_say("Got file and saved it at $file");
+    $self->_maybe_say("Downloaded file and saved it at $file");
 
     $self->_maybe_say( "Updating database at " . $self->database() );
 
