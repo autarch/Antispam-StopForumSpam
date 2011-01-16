@@ -56,7 +56,7 @@ coerce SFSTextFile,
     from SFSZipFile,
     via { _unzip_sfs_file($_) };
 
-role_type SFSDatabase, { role => 'Antispam::StopForumSpam::Role::Database' };
+role_type SFSDatabase, { role => 'Antispam::Toolkit::Role::Database' };
 
 subtype URIObject,
     as class_type('URI');
