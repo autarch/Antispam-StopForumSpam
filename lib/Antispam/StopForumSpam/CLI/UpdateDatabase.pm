@@ -46,7 +46,6 @@ has verbose => (
 has uri_base => (
     is        => 'ro',
     isa       => Str,
-    default   => 'http://www.stopforumspam.com/downloads/',
     predicate => '_has_uri_base',
     documentation =>
         'The base path for downloads - defaults to download from stopforumspam.com',
