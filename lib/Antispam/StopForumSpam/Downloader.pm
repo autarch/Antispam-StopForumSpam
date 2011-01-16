@@ -27,7 +27,7 @@ has _ua => (
 my $BASE_URL
     = $ENV{HARNESS_ACTIVE}
     ? q{}
-    : q{};#'http://www.stopforumspam.com/downloads/';
+    : 'http://www.stopforumspam.com/downloads/';
 
 has uri_base => (
     is      => 'ro',
@@ -104,3 +104,53 @@ sub _make_file {
 __PACKAGE__->meta()->make_immutable();
 
 1;
+
+# ABSTRACT: Downloads data from the stopforumspam.com website
+
+__END__
+
+=head1 SYNOPSIS
+
+  my $dl = Antispam::StopForumSpam::Downloader->new();
+
+  my $content = $dl->download(
+      type => 'email',
+      days => 30,
+  );
+
+  my $file = $dl->download_and_save(
+      type => 'ip',
+      days => 180,
+  );
+
+=head1 DESCRIPTION
+
+This class knows how to download data files from the
+L<http://stopforumspam.com> website.
+
+=head2 License and Terms of Service
+
+While this code is free software, the data from the Stop Forum Spam site has
+its own license.
+
+As of this writing (November, 2010), it is under a Creative Commons license
+that forbids commercial use
+
+=head1 METHODS
+
+This class consumes all the methods (and attributes) of
+L<Antispam::Toolkit::Role::BerkeleyDB> as-is, except for the C<<
+$class->build() >> method.
+
+The build method will accept a zip file downloaded from the
+L<http://stopforumspam.com> website. You do not need to unzip it first.
+
+=head1 ROLES
+
+This class does the L<Antispam::Toolkit::Role::BerkeleyDB> role.
+
+=head1 BUGS
+
+See L<Antispam::StopForumSpam> for bug reporting details.
+
+=cut
